@@ -73,11 +73,22 @@ var getCourses = function(args) {
     }
 }
 
+var updateCourseTopic = function({id, topic}) {
+  coursesData.map(course => {
+      if (course.id === id) {
+          course.topic = topic;
+          return course;
+      }
+  });
+  return coursesData.filter(course => course.id === id) [0];
+}
+
 // connecting the course query action to the getCourse function and
 // connecting the courses query action to the getCourses function
 var root = {
     course: getCourse,
-    courses: getCourses
+    courses: getCourses,
+    updateCourseTopic: updateCourseTopic
 };
 
 
@@ -115,6 +126,15 @@ var root = {
 //   description
 //   topic
 //   url
+// }
+
+/////// Mutation example
+// mutation keyword followed by the name of the operation
+
+// mutation updateCourseTopic($id: Int!, $topic: String!) {
+//   updateCourseTopic(id: $id, topic: $topic) {
+//     ... courseFields
+//   }
 // }
 
 
